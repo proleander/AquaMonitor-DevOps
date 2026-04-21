@@ -14,7 +14,7 @@ Para subir o ambiente completo (API + Banco de Dados Oracle), siga os passos aba
     docker-compose up --build
     ```
 4.  **Acesso:** Após a inicialização, a API estará disponível em:
-    * Swagger (Documentação): `http://localhost:8080/swagger`
+    * Swagger (Documentação): `http://localhost:8080`
 
 ---
 
@@ -54,5 +54,5 @@ O fluxo de integração e entrega contínua foi implementado via **GitHub Action
 ---
 
 ## Funcionamento e prints do projeto
-* **Repositório:** [https://github.com/proleander/AquaMonitor-DevOps](https://github.com/proleander/AquaMonitor-DevOps)
+* **Repositório:** [https://github.com/proleander/AquaMonitor-DevOps]
 * **Pipeline Status:**  Passed (Conforme documentação em PDF)
