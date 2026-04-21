@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  oracle-db:
+    image: gvenzl/oracle-xe:21.3.0
+    container_name: oracle-db
+    restart: always
+    environment:
+      - ORACLE_PASSWORD=oracle
+      - APP_USER=FIAP
+      - APP_USER_PASSWORD=123456
+    ports:
+      - "1521:1521"
+    volumes:
+      - oracle-data:/opt/oracle/oradata
+    healthcheck:
+      test: ["CMD-SHELL", "echo 'SELECT 1 FROM DUAL;' | sqlplus -s sys/oracle as sysdba | grep -q 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+
+  aqua-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: aqua-api
+    restart: always
+   
+    ports:
+      - "8080:8080" 
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ConnectionStrings__DefaultConnection=User Id=FIAP;Password=123456;Data Source=oracle-db:1521/XEPDB1;
+    depends_on:
+      oracle-db:
+        condition: service_healthy
+
+volumes:
+  oracle-data:

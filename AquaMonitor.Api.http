@@ -1,0 +1,6 @@
+@AquaMonitor.Api_HostAddress = http://localhost:5270
+
+GET {{AquaMonitor.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
